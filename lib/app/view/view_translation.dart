@@ -5,6 +5,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:tradutor/app/controller/controller_translation.dart';
 import 'package:tradutor/app/model/model_translation.dart';
 import 'package:tradutor/app/repositories/translate_repository.dart';
+import 'package:tradutor/app/widgets/card_translated.dart';
 
 class ViewTranslation extends StatefulWidget {
   @override
@@ -92,8 +93,11 @@ class _ViewTranslationState extends State<ViewTranslation> {
                                 return Column(
                                     children: controllerTrasnlation
                                         .historyTranslate.value
-                                        .map((e) {
-                                  return cardTranslaated(e);
+                                        .map((modelTranlation) {
+                                  return CardTranslated(
+                                      modelTranslation: modelTranlation,
+                                      action: () => controllerTrasnlation.speak(
+                                          modelTranlation.translatedText));
                                 }).toList());
                               }
                             })),
@@ -120,41 +124,6 @@ class _ViewTranslationState extends State<ViewTranslation> {
                   ),
                 );
               })),
-    );
-  }
-
-  Widget cardTranslaated(ModelTranslation modelTranslation) {
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          color: Colors.grey, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    modelTranslation.translatedText,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    modelTranslation.originalText,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          IconButton(
-              icon: Icon(Icons.music_note),
-              onPressed: () =>
-                  controllerTrasnlation.speak(modelTranslation.translatedText))
-        ],
-      ),
     );
   }
 }

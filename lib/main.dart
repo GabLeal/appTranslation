@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app/view_translation.dart';
+import 'app/view/view_translation.dart';
 
 void main() {
   runApp(MyApp());
