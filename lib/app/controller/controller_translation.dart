@@ -24,8 +24,8 @@ class ControllerTrasnlation {
       bool available = await _speech.initialize(
           onStatus: (val) => print('OnStatus: $val'),
           onError: (val) {
-            isListening.value = false;
             print('onError: $val');
+            isListening.value = false;
           });
 
       if (available) {
